@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448"
+   height="316.35999"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="treadmilldb.svg">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.01"
+     inkscape:cx="375"
+     inkscape:cy="192.09808"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1154"
+     inkscape:window-height="715"
+     inkscape:window-x="1"
+     inkscape:window-y="56"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-736.0006)">
+    <text
+       xml:space="preserve"
+       style="font-size:22px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="342.57431"
+       y="933.55029"
+       id="text2985"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan2987"
+         x="342.57431"
+         y="933.55029">zmq</tspan></text>
+    <rect
+       style="fill:#008080;fill-opacity:1;stroke-width:4.28000021;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect3013"
+       width="195.0495"
+       height="168.31683"
+       x="87.128708"
+       y="821.66907" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#00ffff;fill-opacity:1;stroke-width:4.28000021;stroke-miterlimit:4;stroke-dasharray:none"
+       id="path2995"
+       sodipodi:cx="144.55446"
+       sodipodi:cy="204.83743"
+       sodipodi:rx="70.297028"
+       sodipodi:ry="27.722773"
+       d="m 214.85149,204.83743 c 0,15.31087 -31.47306,27.72278 -70.29703,27.72278 -38.82398,0 -70.297029,-12.41191 -70.297029,-27.72278 0,-15.31086 31.473049,-27.72277 70.297029,-27.72277 38.82397,0 70.29703,12.41191 70.29703,27.72277 z"
+       transform="translate(27.722772,723.76238)" />
+    <text
+       xml:space="preserve"
+       style="font-size:22px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="129.70297"
+       y="933.55029"
+       id="text2989"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan2991"
+         x="129.70297"
+         y="933.55029">leveldb</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:22px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="113.86139"
+       y="853.35223"
+       id="text2997"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan2999"
+         x="113.86139"
+         y="853.35223">rust</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:22px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="139.60396"
+       y="873.15424"
+       id="text3001"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3003"
+         x="139.60396"
+         y="873.15424">reactor</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:22px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="136.63367"
+       y="891.96613"
+       id="text3005"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="136.63367"
+         y="891.96613"
+         id="tspan3009">map/reduce</tspan></text>
+    <rect
+       style="fill:#008080;fill-opacity:1;stroke-width:4.28000021;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect3013-7"
+       width="195.0495"
+       height="168.31683"
+       x="451.98022"
+       y="822.65918" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#00ffff;fill-opacity:1;stroke-width:4.28000021;stroke-miterlimit:4;stroke-dasharray:none"
+       id="path2995-5"
+       sodipodi:cx="144.55446"
+       sodipodi:cy="204.83743"
+       sodipodi:rx="70.297028"
+       sodipodi:ry="27.722773"
+       d="m 214.85149,204.83743 c 0,15.31087 -31.47306,27.72278 -70.29703,27.72278 -38.82398,0 -70.297029,-12.41191 -70.297029,-27.72278 0,-15.31086 31.473049,-27.72277 70.297029,-27.72277 38.82397,0 70.29703,12.41191 70.29703,27.72277 z"
+       transform="translate(392.57426,724.75247)" />
+    <text
+       xml:space="preserve"
+       style="font-size:22px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="494.5545"
+       y="934.54041"
+       id="text2989-3"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan2991-7"
+         x="494.5545"
+         y="934.54041">leveldb</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:22px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="478.71292"
+       y="854.34235"
+       id="text2997-0"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan2999-0"
+         x="478.71292"
+         y="854.34235">rust</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:22px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="504.45547"
+       y="874.14435"
+       id="text3001-4"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3003-0"
+         x="504.45547"
+         y="874.14435">reactor</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:22px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="501.4852"
+       y="892.95624"
+       id="text3005-5"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="501.4852"
+         y="892.95624"
+         id="tspan3009-0">map/reduce</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 450.49505,940.48099 -166.33663,-0.9901"
+       id="path3060"
+       inkscape:connector-curvature="0" />
+  </g>
+</svg>
