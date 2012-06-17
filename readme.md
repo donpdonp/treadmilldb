@@ -14,11 +14,12 @@ POST http://server:1444/bucket (create)
 ```
 POST http://server:1444/bucket/_query/name
 data -> { map: "function(doc){ return doc.name}"}
+GET http://server:1444/bucket/_query/name
 result -> { count: 1,
-          rows: [{name: "Sam"}]}
+            rows: [{name: "Sam"}]}
 ```
 
-## Activity Log
+## Activity Feed
 ```
 GET http://server:1444/bucket/_activity
 ```
@@ -28,10 +29,10 @@ GET http://server:1444/bucket/_activity
 GET http://server:1444/_system/peers
 result -> { count: 1,
             peers: [{name: "box1.local",
-                     zmq_path: "tcp://otherbox.local:1444",
+                     zmq_uri: "tcp://box1.local:1444",
                      sequence_number: 34}]}
 POST http://server:1444/_system/peers
-data -> { zmq_path: "xxx://123"}
+data -> { zmq_uri: "xxx://123"}
 DELETE http://server:1444/_system/peers/box1.local
 ```
 
@@ -59,4 +60,32 @@ sequentially with a sequence number.
 Both clients and peers can use the activity feed to keep their
 local data fresh.
 
-## Merge conflicts
+## Sync/Merge
+
+case: Record creation
+
+Initial state
+```
+box1.local
+
+box2.local
+sequence: 0
+activity_log: []
+```
+
+Create record.
+```
+$ curl -X POST -d {id:"document1", color:"blue"} http://box1.local/bucket1/
+```
+
+Record created.
+```
+box1.local
+bucket1: [{id:"document1", rev:"123abc", color:"blue"}]
+sequence: 1
+activity_log: [{seq: 1, id:"document1", changes["123abc"]}
+
+box2.local
+sequence: 0
+activity_log: []
+```
