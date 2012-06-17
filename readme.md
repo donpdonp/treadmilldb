@@ -67,14 +67,14 @@ case: Record creation
 Initial state
 ```
 box1.local
-sequence: 0
 activity_log: []
-* bucket1: []
+* bucket1: sequence: 0,
+           rows: []
 
 box2.local
-sequence: 0
 activity_log: []
-* bucket1: []
+* bucket1: sequence: 0,
+           rows: []
 ```
 
 Create record.
@@ -86,24 +86,51 @@ $ curl -X POST -d {id:"document1", color:"blue"} http://box1.local:1444/bucket1/
 Record created.
 ```
 box1.local
-sequence: 1
 activity_log: [{seq: 1, id:"document1", changes["rev1-223abc"]}]
-* bucket1: [{id:"document1", rev:"123abc", color:"blue"}]
+* bucket1: sequence: 1,
+           rows: [{id:"document1", rev:"123abc", color:"blue"}]
 
 box2.local
-sequence: 0
 activity_log: []
-* bucket1: []
+* bucket1: sequence: 0,
+           rows:[]
 ```
 
 Broadcast new activity log entry
 ```
 box1.local
-zmq_send(peers, {seq: 1, id:"document1", changes["rev1-223abc"]})
+zmq_send(peers, {seq: 1, id:"document1", changes: ["rev1-223abc"]})
 
 box2.local
-new_log_entry = zmq_recv(peers)
+recivied_entry = zmq_recv(peers)
 ```
 
 What happens next on box2 depends on the state of its bucket1.
+The following is pseudo-code to show the steps.
 
+```
+if received_entry.seq+1 != bucket1.sequence
+  if received_entry.deleted == true # DELETE
+    delete_document_and_index_data(received_entry.id)
+  end
+  if bucket1.contains(received_entry.id)
+    update_document_and_index_data(received_entry) # UPDATE
+  else
+    create_document_and_index_data(received_entry) # CREATE
+  end
+  received_entry.seq = bucket1.sequence
+else
+  # ignore out-of-sequence entry
+end
+```
+
+The delete and create methods are straight-forward. The update method
+can end up with merges and merge conflicts. Also pretend the received_entry
+is the entire document at the given revision, which is passed to the update
+function.
+
+```
+fn update_document_and_index_data(document) {
+
+}
+```
