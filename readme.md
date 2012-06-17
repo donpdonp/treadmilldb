@@ -79,14 +79,15 @@ activity_log: []
 
 Create record.
 ```
-$ curl -X POST -d {id:"document1", color:"blue"} http://box1.local/bucket1/
+$ curl -X POST -d {id:"document1", color:"blue"} http://box1.local:1444/bucket1/
+{status: "OK", id:"document1", rev:"rev1-223abc"}
 ```
 
 Record created.
 ```
 box1.local
 sequence: 1
-activity_log: [{seq: 1, id:"document1", changes["123abc"]}
+activity_log: [{seq: 1, id:"document1", changes["rev1-223abc"]}]
 * bucket1: [{id:"document1", rev:"123abc", color:"blue"}]
 
 box2.local
@@ -96,4 +97,13 @@ activity_log: []
 ```
 
 Broadcast new activity log entry
+```
+box1.local
+zmq_send(peers, {seq: 1, id:"document1", changes["rev1-223abc"]})
+
+box2.local
+new_log_entry = zmq_recv(peers)
+```
+
+What happens next on box2 depends on the state of its bucket1.
 
