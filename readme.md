@@ -109,7 +109,7 @@ What happens next on box2 depends on the state of its bucket1.
 The following is pseudo-code to show the steps.
 
 ```
-if received_entry.seq+1 != bucket1.sequence
+if received_entry.seq != bucket1.sequence+1
   if received_entry.deleted == true # DELETE
     delete_document_and_index_data(received_entry.id)
   end
@@ -130,7 +130,11 @@ is the entire document at the given revision, which is passed to the update
 function.
 
 ```
-fn update_document_and_index_data(document) {
+fn update_document_and_index_data(new_document) {
+  existing_document = bucket1.get(new_document.id)
+  # unfinished, see software transactional memory
+  if new_document.rev_num > existing_document.rev_num
 
+  end
 }
 ```
