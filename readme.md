@@ -67,10 +67,14 @@ case: Record creation
 Initial state
 ```
 box1.local
+sequence: 0
+activity_log: []
+* bucket1: []
 
 box2.local
 sequence: 0
 activity_log: []
+* bucket1: []
 ```
 
 Create record.
@@ -81,11 +85,15 @@ $ curl -X POST -d {id:"document1", color:"blue"} http://box1.local/bucket1/
 Record created.
 ```
 box1.local
-bucket1: [{id:"document1", rev:"123abc", color:"blue"}]
 sequence: 1
 activity_log: [{seq: 1, id:"document1", changes["123abc"]}
+* bucket1: [{id:"document1", rev:"123abc", color:"blue"}]
 
 box2.local
 sequence: 0
 activity_log: []
+* bucket1: []
 ```
+
+Broadcast new activity log entry
+
