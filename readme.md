@@ -27,10 +27,12 @@ GET http://server:1444/bucket/_activity
 ```
 GET http://server:1444/_system/peers
 result -> { count: 1,
-          peers: [{zmq_path: "tcp://otherbox.local:1444",
-                   sequence_number: 34}]}
+            peers: [{zmq_path: "tcp://otherbox.local:1444",
+                     sequence_number: 34}]}
 POST http://server:1444/_system/peers
-data -> { zmq_path: "xxx://123"}
+data -> { name: "box1",
+          zmq_path: "xxx://123"}
+DELETE http://server:1444/_system/peers/box1
 ```
 
 # Implementation
