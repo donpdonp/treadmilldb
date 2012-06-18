@@ -109,16 +109,18 @@ What happens next on box2 depends on the state of its bucket1.
 The following is pseudo-code to show the steps.
 
 ```
-if received_entry.seq != bucket1.sequence+1
+if received_entry.seq == bucket1.sequence+1
   if received_entry.deleted == true # DELETE
     delete_document_and_index_data(received_entry.id)
   end
+  new_document = fetch(received_entry.host,
+                       received_entry.id, received_entry.rev)
   if bucket1.contains(received_entry.id)
-    update_document_and_index_data(received_entry) # UPDATE
+    update_document_and_index_data(new_document) # UPDATE
   else
-    create_document_and_index_data(received_entry) # CREATE
+    create_document_and_index_data(new_document) # CREATE
   end
-  received_entry.seq = bucket1.sequence
+  bucket1.sequence = received_entry.seq
 else
   # ignore out-of-sequence entry
 end
