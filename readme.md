@@ -38,14 +38,26 @@ DELETE http://server:1444/_system/peers/box1.local
 
 # Implementation
 ## View indexes
-For each query name, a list of answers is established.
-{key: "document_id", value: "map function return value"}
-To answer a query, return the key/value pairs that match the
-query term.
+For queries that are more complex than retrieving by id,
+a map method is defined in javascript. The map values
+for every record are pre-computed and kept in an index.
 
-When a document is created, append that key/value to the view
-index. If a document is modified, recompute the value for that
-document. If a document is removed, remove the key/value.
+```
+{ map: "function(doc){ return doc.name}"}
+```
+
+```
+{key: "a1", value: "John Doe"}
+{key: "d4", value: "Sam Smith"}
+{key: "e3", value: "Jenny Jones"}
+```
+
+A query is named and when run, given a query term.
+To answer a query, return the key/value pairs where
+the value matches the query term.
+
+When a document is created, updated, or removed, create,
+re-compute, or update the map function result in the index.
 
 ## Activity feed
 Every change to a document creates an activity entry with
