@@ -130,11 +130,22 @@ is the entire document at the given revision, which is passed to the update
 function.
 
 ```
-fn update_document_and_index_data(new_document) {
+def update_document_and_index_data(new_document)
   existing_document = bucket1.get(new_document.id)
-  # unfinished, see software transactional memory
   if new_document.rev_num > existing_document.rev_num
-
+    # longest history wins, shorter history is lost
+    winning_document = new_document
   end
-}
+  if new_document.rev_num == existing_document.rev_num
+    # random winner
+    if new_document.hash > existing_document.hash
+      winning_document = new_document
+    else
+      winning_document = existing_document
+    end
+  end
+  # longest history wins, shorter history is lost!
+  existing_document.rev = winning_document.rev
+  existing_document.body = winning_document.body
+end
 ```
