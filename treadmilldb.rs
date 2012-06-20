@@ -9,7 +9,7 @@ fn main(args: [str]) {
   let config = config();
   let epoll_fd = setup(config);
 
-  io::println("treadmill db has started. time to get moving.")
+  io::println("treadmill db has started. time to get moving.");
   listen(epoll_fd);
 }
 
@@ -25,7 +25,13 @@ fn setup(config: config) -> int {
     result::ok(s) {
       alt socket::listen(s, 1) {
         result::ok(socket) {
-          io::println("Listening on "+#fmt("%u", config.port as uint));
+          io::println("socket fd:"+#fmt("%d", **socket));
+          let ok = epoll::epoll_ctl(ep, epoll::EPOLL_CTL_ADD, **socket,
+                           {events: epoll::EPOLLIN, data:**socket as u64});
+          if ok == 0 {
+            io::println("Listening on :"+#fmt("%u", config.port as uint));
+            ret ep;
+          }
         }
         result::err(e) {
           io::println(#fmt("listen error: %s", e));
@@ -36,6 +42,13 @@ fn setup(config: config) -> int {
       io::println(#fmt("bind error: %s", e));
     }
   }
+  ret -1; // error handling
+}
 
-  ret ep;
+fn listen(fd: int) {
+  io::println("fd:"+#fmt("%d", fd));
+  let out_events: [mut epoll::epoll_event] = [mut{events:0i32, data:0u64},
+                                                 {events:0i32, data:0u64}];
+  epoll::epoll_wait(fd, out_events, -1);
+  io::println("fish on");
 }
