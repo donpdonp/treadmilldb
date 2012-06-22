@@ -139,8 +139,9 @@ end
 ```
 
 The delete and create methods are straight-forward. The update method
-can end up with a merge conflict. Only the lastest revision is available
-so there is no common ancestor. A longest-history wins approach is
+can end up with a merge conflict. The document's lastest revision is
+the only revision available so there is no computing the difference
+from a common ancestor revision. A longest-history wins approach is
 used as the default merge strategy.
 
 ```
