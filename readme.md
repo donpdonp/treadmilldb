@@ -139,26 +139,27 @@ end
 ```
 
 The delete and create methods are straight-forward. The update method
-can end up with merges and merge conflicts. Also pretend the received_entry
-is the entire document at the given revision, which is passed to the update
-function.
+can end up with merges and merge conflicts.
 
 ```
 def update_document_and_index_data(new_document)
+  # fetch the lastest local copy of the document
   existing_document = bucket1.get(new_document.id)
   if new_document.rev_num > existing_document.rev_num
-    # longest history wins, shorter history is lost
+    # longest history wins, shorter history is lost!
     winning_document = new_document
   end
   if new_document.rev_num == existing_document.rev_num
     # random winner
     if new_document.hash > existing_document.hash
-      winning_document = new_document
+      # though the body is the same, make a new rev to
+      # broadcast the change
+      winning_document.rev_num = new_document.rev_num+1
+      winning_document = new_document.body
     else
       winning_document = existing_document
     end
   end
-  # longest history wins, shorter history is lost!
   existing_document.rev = winning_document.rev
   existing_document.body = winning_document.body
 end
