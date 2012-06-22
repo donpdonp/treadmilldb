@@ -153,7 +153,7 @@ def update_document_and_index_data(new_document)
     # random winner
     if new_document.hash > existing_document.hash
       # though the body is the same, make a new rev to
-      # broadcast the change
+      # broadcast the change. (does this converge?)
       winning_document.rev_num = new_document.rev_num+1
       winning_document = new_document.body
     else
