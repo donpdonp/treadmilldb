@@ -155,7 +155,7 @@ def update_document_and_index_data(new_document)
       # though the body is the same, make a new rev to
       # broadcast the change. (does this converge?)
       better_document.rev_num = new_document.rev_num+1
-      better_document = new_document.body
+      better_document.body = new_document.body
     end
   end
   if better_document
