@@ -139,7 +139,9 @@ end
 ```
 
 The delete and create methods are straight-forward. The update method
-can end up with merges and merge conflicts.
+can end up with a merge conflict. Only the lastest revision is available
+so there is no common ancestor. A longest-history wins approach is
+used as the default merge strategy.
 
 ```
 def update_document_and_index_data(new_document)
