@@ -147,20 +147,19 @@ def update_document_and_index_data(new_document)
   existing_document = bucket1.get(new_document.id)
   if new_document.rev_num > existing_document.rev_num
     # longest history wins, shorter history is lost!
-    winning_document = new_document
+    better_document = new_document
   end
   if new_document.rev_num == existing_document.rev_num
     # random winner
     if new_document.hash > existing_document.hash
       # though the body is the same, make a new rev to
       # broadcast the change. (does this converge?)
-      winning_document.rev_num = new_document.rev_num+1
-      winning_document = new_document.body
-    else
-      winning_document = existing_document
+      better_document.rev_num = new_document.rev_num+1
+      better_document = new_document.body
     end
   end
-  existing_document.rev = winning_document.rev
-  existing_document.body = winning_document.body
+  if better_document
+    existing_document = better_document
+  end
 end
 ```
