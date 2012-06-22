@@ -125,12 +125,12 @@ if received_entry.seq == bucket1.sequence+1
   if received_entry.deleted == true # DELETE
     delete_document_and_index_data(received_entry.id)
   end
-  new_document = fetch(received_entry.host,
+  received_document = fetch(received_entry.host,
                        received_entry.id, received_entry.rev)
   if bucket1.contains(received_entry.id)
-    update_document_and_index_data(new_document) # UPDATE
+    update_document_and_index_data(received_document) # UPDATE
   else
-    create_document_and_index_data(new_document) # CREATE
+    create_document_and_index_data(received_document) # CREATE
   end
   bucket1.sequence = received_entry.seq
 else
@@ -144,20 +144,20 @@ so there is no common ancestor. A longest-history wins approach is
 used as the default merge strategy.
 
 ```
-def update_document_and_index_data(new_document)
+def update_document_and_index_data(received_document)
   # fetch the lastest local copy of the document
-  existing_document = bucket1.get(new_document.id)
-  if new_document.rev_num > existing_document.rev_num
+  existing_document = bucket1.get(received_document.id)
+  if received_document.rev_num > existing_document.rev_num
     # longest history wins, shorter history is lost!
-    better_document = new_document
+    better_document = received_document
   end
-  if new_document.rev_num == existing_document.rev_num
+  if received_document.rev_num == existing_document.rev_num
     # random winner
-    if new_document.hash > existing_document.hash
+    if received_document.hash > existing_document.hash
       # though the body is the same, make a new rev to
       # broadcast the change. (does this converge?)
-      better_document.rev_num = new_document.rev_num+1
-      better_document.body = new_document.body
+      better_document.rev_num = received_document.rev_num+1
+      better_document.body = received_document.body
     end
   end
   if better_document
