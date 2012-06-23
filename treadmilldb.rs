@@ -17,25 +17,17 @@ fn setup() -> result::result<(int, @socket::socket_handle),str> {
   let ep = epoll::epoll_create();
 
   alt socket::bind_socket("localhost", 1444) {
-    result::ok(s) {
-      alt socket::listen(s, 1) {
-        result::ok(socket) {
-          io::println("socket fd:"+#fmt("%d", **socket as int));
-          let ok = epoll::epoll_ctl(ep, epoll::EPOLL_CTL_ADD, **socket as int,
-                           {events: epoll::EPOLLIN, data:**socket as u64});
-          if ok == 0 {
-            io::println("Listening on :"+#fmt("%u", 1444 as uint));
-            ret result::ok((ep, s));
-          }
-        }
-        result::err(e) {
-          io::println(#fmt("listen error: %s", e));
-        }
-      }
-    }
+    result::ok(socket) {
+      socket::listen(socket, 1);
+      io::println("socket fd:"+#fmt("%d", **socket as int));
+      let ok = epoll::epoll_ctl(ep, epoll::EPOLL_CTL_ADD, **socket as int,
+                       {events: epoll::EPOLLIN, data:**socket as u64});
+      if ok == 0 {
+        io::println("Listening on :"+#fmt("%u", 1444 as uint));
+        ret result::ok((ep, socket));
+      } }
     result::err(e) {
-      io::println(#fmt("bind error: %s", e));
-    }
+      io::println(#fmt("bind error: %s", e)); }
   }
   ret result::err("error");
 }
