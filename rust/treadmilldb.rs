@@ -5,8 +5,8 @@ use socket;
 
 fn main(_args: [str]) {
   // configuration
-  let ok = setup();
-  let (epoll_fd, socket) = result::get(ok);
+  let config = setup();
+  let (epoll_fd, socket) = result::get(config);
 
   io::println("treadmill db has started. time to get moving.");
   loop {
