@@ -6,9 +6,10 @@ use socket;
 fn main(_args: [str]) {
   // configuration
   let ok = setup();
+  let (epoll_fd, socket) = result::get(ok);
 
   io::println("treadmill db has started. time to get moving.");
-  listen(result::get(ok));
+  listen(epoll_fd);
 }
 
 
@@ -36,14 +37,12 @@ fn setup() -> result::result<(int, @socket::socket_handle),str> {
       io::println(#fmt("bind error: %s", e));
     }
   }
-  ret result::err("fuck");
+  ret result::err("error");
 }
 
-fn listen(ep: (int, @socket::socket_handle))  {
-  let (a,b) = ep;
-  io::println("epfd:"+#fmt("%d", 1444));
+fn listen(ep: int)  {
   let out_events: [mut epoll::epoll_event] = [mut{events:0i32, data:0u64},
                                                  {events:0i32, data:0u64}];
-  let retu = epoll::epoll_wait(a, out_events, -1);
+  let retu = epoll::epoll_wait(ep, out_events, -1);
   io::println("fish on "+#fmt("%d", retu ));
 }
