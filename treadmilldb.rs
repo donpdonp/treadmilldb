@@ -1,36 +1,30 @@
 // treadmilldb
+use std;
 use epoll;
 use socket;
 
-type config = {port: u16};
-
-fn main(args: [str]) {
-  // listen to http
-  let config = config();
-  let epoll_fd = setup(config);
+fn main(_args: [str]) {
+  // configuration
+  let ok = setup();
 
   io::println("treadmill db has started. time to get moving.");
-  listen(epoll_fd);
+  listen(result::get(ok));
 }
 
-fn config() -> config {
-  // load from file
-  ret {port: 1444_u16};
-}
 
-fn setup(config: config) -> int {
+fn setup() -> result::result<(int, @socket::socket_handle),str> {
   let ep = epoll::epoll_create();
 
-  alt socket::bind_socket("localhost", config.port) {
+  alt socket::bind_socket("localhost", 1444) {
     result::ok(s) {
       alt socket::listen(s, 1) {
         result::ok(socket) {
-          io::println("socket fd:"+#fmt("%d", **socket));
-          let ok = epoll::epoll_ctl(ep, epoll::EPOLL_CTL_ADD, **socket,
+          io::println("socket fd:"+#fmt("%d", **socket as int));
+          let ok = epoll::epoll_ctl(ep, epoll::EPOLL_CTL_ADD, **socket as int,
                            {events: epoll::EPOLLIN, data:**socket as u64});
           if ok == 0 {
-            io::println("Listening on :"+#fmt("%u", config.port as uint));
-            ret ep;
+            io::println("Listening on :"+#fmt("%u", 1444 as uint));
+            ret result::ok((ep, s));
           }
         }
         result::err(e) {
@@ -42,13 +36,14 @@ fn setup(config: config) -> int {
       io::println(#fmt("bind error: %s", e));
     }
   }
-  ret -1; // error handling
+  ret result::err("fuck");
 }
 
-fn listen(fd: int) {
-  io::println("fd:"+#fmt("%d", fd));
+fn listen(ep: (int, @socket::socket_handle))  {
+  let (a,b) = ep;
+  io::println("epfd:"+#fmt("%d", 1444));
   let out_events: [mut epoll::epoll_event] = [mut{events:0i32, data:0u64},
                                                  {events:0i32, data:0u64}];
-  epoll::epoll_wait(fd, out_events, -1);
-  io::println("fish on");
+  let retu = epoll::epoll_wait(a, out_events, -1);
+  io::println("fish on "+#fmt("%d", retu ));
 }
