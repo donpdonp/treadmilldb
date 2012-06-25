@@ -37,6 +37,19 @@ fn listen(ep: int, sock: @socket::socket_handle)  {
                                                  {events:0i32, data:0u64}];
   let retu = epoll::epoll_wait(ep, out_events, -1);
 
-  socket::accept(sock);
-  task::spawn {|| io::println("fish here")}
+  let tuple = socket::accept(sock);
+  let (s, msg) = result::get(tuple);
+  io::println("pre spawn");
+  task::spawn {||
+    dispatch(@socket::socket_handle(s), msg);
+  }
+  io::println("post spawn\n");
+}
+
+fn dispatch(socket: @socket::socket_handle, host: str) {
+  io::println(#fmt("%d", **socket as int) + "writing");
+  str::as_bytes("Hello") {|buf|
+    socket::send(socket, buf);
+  }
+  io::println(#fmt("%d", **socket as int) + "written");
 }
